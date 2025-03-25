@@ -299,9 +299,11 @@ async def generate_chapters(request: VideoRequest):
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"An unexpected error occurred: {str(e)}")
 
+@app.get("/wake")
+async def wake_up():
+    return {"message": "I Won't Sleep"}
+
 @app.get("/")
 async def root():
     return {"message": "YouTube Chapter Generator API is running. Use /generate_chapters endpoint to extract transcripts."}
 
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
